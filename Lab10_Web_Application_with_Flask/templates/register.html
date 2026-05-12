@@ -1,0 +1,17 @@
+<!-- Modify the Register Template Layout -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Create a New Account</h2>
+<p>Please fill in the details below:</p>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <!-- Add Class to Email Field -->
+    <div>{{ form.email.label }}<br>{{ form.email(class_="input-field") }}</div>
+
+    <div>{{ form.password.label }}<br>{{ form.password(class_="input-field") }}</div>
+    <!-- Use Bootstrap Button Class -->
+    {{ form.submit(class_="btn btn-primary") }}
+
+</form>
+{% endblock %}
+

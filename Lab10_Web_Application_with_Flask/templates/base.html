@@ -1,0 +1,55 @@
+<img src="{{ url_for('static', filename='images/TUP.png') }}" alt="Logo"
+width="100">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activity 10 Flask Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')
+}}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/TUP.png') }}" alt="TUP
+Logo">
+        <h1>Activity 10 Flask Web App</h1>
+    </header>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('students') }}">Students</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+            
+
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </nav>
+    <main>
+        <!-- Show Current User Email -->
+        {% if current_user.is_authenticated %}
+            <p>Welcome, {{ current_user.email }}</p>
+        {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <!-- Style Flash Messages in Red -->
+                {% for msg in messages %}
+                    <p style="color: red;">{{ msg }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Add Footer to Base Template -->
+<footer style="text-align:center; padding: 10px;">© 2025 Flask Activity</footer>
+</body>
+</html>
+
+

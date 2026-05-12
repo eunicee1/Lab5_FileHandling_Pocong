@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Profile Management</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <label>Display Name:</label>
+    <input type="text" name="display_name" value="{{ user.display_name or '' }}"><br>
+
+    <label>Profile Picture:</label>
+    <input type="file" name="profile_picture" accept=".jpg,.jpeg,.png"><br>
+
+    <button type="submit">Update Profile</button>
+</form>
+
+{% if user.display_name %}
+    <h3>Welcome, {{ user.display_name }}</h3>
+{% endif %}
+
+{% if user.image_filename %}
+    <img src="{{ url_for('static', filename='uploads/' + user.image_filename) }}" width="150">
+{% endif %}
+
+{% endblock %}
